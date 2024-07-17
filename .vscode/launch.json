@@ -1,11 +1,11 @@
 {
     "configurations": [
         {
-            "name": "C/C++: gcc build and debug active file",
+            "name": "Building push_swap", //just a name
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
+            "program": "${workspaceFolder}/push_swap.a",
+            "args": ["123 ", "456 ", "789 "],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -24,7 +24,7 @@
                 }
             ],
             "preLaunchTask": "C/C++: gcc build active file",
-            "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ],
     "version": "2.0.0"
