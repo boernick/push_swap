@@ -15,12 +15,13 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "/home/nboer/git/ft_printf/ft_printf.h"
-#include "/home/nboer/git/Libft/libft.h"
+// #include "/home/nboer/git/ft_printf/ft_printf.h"
+// #include "/home/nboer/git/Libft/libft.h"
 
 typedef struct s_stack_node
 {
-	int				num;
+	//change later the num to INT
+	char*			num;
 	struct s_stack_node *next;
 	struct s_stack_node	*prev;
 	struct s_stack_node	*target;
@@ -30,7 +31,7 @@ typedef struct s_stack_node
 
 // void	get_user_input(int argc, char *argv[]);
 int 			check_input(int argc, char *argv[]);
-t_stack_node*	add_node_stack(t_stack_node **lst, int num);
+void			add_node_stack(t_stack_node **lst, char *num);
 
 
 #endif
