@@ -5,64 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/20 16:45:05 by nboer            ###   ########.fr       */
+/*   Created: 2024/07/13 12:23:09 by nboer             #+#    #+#             */
+/*   Updated: 2024/07/20 22:53:01 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// 2 lists A B are already made; next function needs to take 2 lists as input, switch the first two
-
 #include "push_swap.h"
+#include <unistd.h>
+#include <stdlib.h>
 
-void	push_top(t_list **src, t_list **dst)
+// IMPORTANT NOTE: TO BUILD; FIRST MAKE FCLEAN, THEN MAKE, THEN F5 TO DEBUG THE EXECUTABLE.
+
+void	print_list(t_list *lst)
 {
 	t_list	*tmp;
-
-	if (src == NULL || dst == NULL)
-		return ;
-	tmp = *src;
-	*src = (*src)->next;
-	tmp->next = *dst;
-	*dst = tmp;
-	write(1, "PA\n", 3);
-
+	
+	tmp = lst;
+	while (tmp->next != NULL)
+	{
+		printf("%s", (char *)tmp->content);
+		tmp = tmp->next;
+	}
+	printf("%s \n", (char *)tmp->content);
 }
 
-void	swap_top_a(t_list **lst)
+int	main(int argc, char *argv[])
 {
-	t_list	*first;
-	t_list	*second;
-
-	if ((*lst) == NULL || (*lst)->next == NULL)
-		return ;
-	first = *lst;
-	second = (*lst)->next;
-	first->next = second->next;
-	second->next = first;
-	*lst = second;
-	write(1, "SA\n", 3);
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int i;
+	
+	stack_a = NULL;
+	stack_b = NULL;
+	i = 1; //because the 0 index is the file location
+	if (check_input(argc, argv))
+	{
+		// if (argc == 2) //IF 1 argument,deel de string op in een array van korte strings 
+		// 	ft_split(argv[1], ' '); //deze array in een variable opslaan
+		// 	atoi() // array of strings naar array of integers
+		while (i < argc)
+			{
+				ft_lstadd_back(&stack_a,  ft_lstnew(argv[i]));
+				ft_lstadd_back(&stack_b, ft_lstnew("000 "));
+				i++;
+			}
+		print_list(stack_a);
+		print_list(stack_b);
+		rev_rotate_both(&stack_a, &stack_b); // works in both directions!
+		print_list(stack_a);
+		print_list(stack_b);
+	}	
+	return (0);
 }
-
-void	swap_top_b(t_list **lst)
-{
-	t_list	*first;
-	t_list	*second;
-
-	if ((*lst) == NULL || (*lst)->next == NULL)
-		return ;
-	first = *lst;
-	second = (*lst)->next;
-	first->next = second->next;
-	second->next = first;
-	*lst = second;
-	write(1, "SB\n", 3);
-}
-
-void	swap_top_both(t_list **lst_a, t_list **lst_b)
-{
-	if ((*lst_a) == NULL || (*lst_b) == NULL)
-		return ;
-	swap_top_a(lst_a);
-	swap_top_b(lst_b);
-}
-
