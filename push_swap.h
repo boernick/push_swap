@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/17 18:00:41 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/20 16:51:03 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef struct s_stack_node
 // void	get_user_input(int argc, char *argv[]);
 int 			check_input(int argc, char *argv[]);
 void			add_node_stack(t_stack_node **lst, char *num);
+void			push_top_a(t_list **src, t_list **dst);
+void			push_top_b(t_list **src, t_list **dst);
+void			swap_top_a(t_list **lst);
+void			swap_top_b(t_list **lst);
+void			swap_top_both(t_list **lst_a, t_list **lst_b);
 
 
 #endif

@@ -4,7 +4,7 @@
             "name": "Building push_swap", //just a name
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/push_swap.a",
+            "program": "${workspaceFolder}/push_swap",
             "args": ["123 ", "456 ", "789 "],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

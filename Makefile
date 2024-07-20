@@ -1,7 +1,7 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
-SRCS = main.c
+SRCS = main.c push_swap.c
 OBJS = $(SRCS:.c=.o)
 HEADER = push_swap.h
 
