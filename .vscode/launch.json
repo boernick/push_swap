@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["12 34 56 78 91"],
+            "args": ["12 ", "34 ", "56 "],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
