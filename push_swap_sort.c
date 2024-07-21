@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   push_swap_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/21 14:31:36 by nboer            ###   ########.fr       */
+/*   Created: 2024/07/21 12:31:10 by nboer             #+#    #+#             */
+/*   Updated: 2024/07/21 13:29:34 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// build void ft_free(t_list *lst)
+// 1. Push two numbers to stack B
 
-void	print_list(t_list *lst)
-{
-	t_list	*tmp;
-	
-	tmp = lst;
-	while (tmp->next != NULL)
-	{
-		printf("%s", (char *)tmp->content);
-		tmp = tmp->next;
-	}
-	printf("%s \n", (char *)tmp->content);
-}
+//2. Check how many operations it takes for every number in A, to put it in the right spot in B
+	// What do i need for this? function to get the index of a value(number) in A, 
 
-void	ft_error(void)
-{
-	write(2, "Error\n", 6);
-	exit(1);
-}

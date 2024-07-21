@@ -1,11 +1,11 @@
 {
     "configurations": [
         {
-            "name": "Building push_swap", //just a name
+            "name": "C/C++: gcc build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/push_swap",
-            "args": ["123 ", "456 ", "789 "],
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": ["12 34 56 78 91"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

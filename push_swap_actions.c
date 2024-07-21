@@ -6,11 +6,9 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/20 22:44:03 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/21 13:29:28 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// 2 lists A B are already made; next function needs to take 2 lists as input, switch the first two
 
 #include "push_swap.h"
 
@@ -25,7 +23,6 @@ void	push_top_a(t_list **src, t_list **dst) //push top a to b
 	tmp->next = *dst;
 	*dst = tmp;
 	write(1, "PA\n", 3);
-
 }
 
 void	push_top_b(t_list **src, t_list **dst) //push top b to a
@@ -39,7 +36,6 @@ void	push_top_b(t_list **src, t_list **dst) //push top b to a
 	tmp->next = *dst;
 	*dst = tmp;
 	write(1, "PB\n", 3);
-
 }
 
 void	swap_top_a(t_list **lst, int j) //swap first A node with second A node 
