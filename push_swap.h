@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/21 18:54:36 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/21 20:53:40 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ t_list			*ft_lstlast(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 t_list			*newnode_int(int value);
 void			init_sort(t_list **stack_a, t_list **stack_b);
+void			free_lst(t_list **lst);
+int				get_index(t_list *stack_a, int num);
 
 #endif
