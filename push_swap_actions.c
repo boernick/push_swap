@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/21 18:32:20 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/21 20:55:32 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	swap_top_both(t_list **lst_a, t_list **lst_b) // Swap both first nodes of A
 	swap_top_a(lst_a, 0);
 	swap_top_b(lst_b, 0);
 	write(1, "SS\n", 3);
-
 }
 
 void	rotate_a(t_list **lst, int j) //The first A element becomes the last one.
