@@ -6,14 +6,14 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:46:35 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/21 18:32:49 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/24 19:56:42 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// function that checks if there are double numbers in the stack
-// function that checks if there are 
+// function that checks if there are double numbers in the stack --> this is after list creation
+// function that checks if there are non-alphanumerical? --> this should be before list creation
 
 void	input_single(char*	arg, t_list **stack_a)
 {
@@ -29,7 +29,7 @@ void	input_single(char*	arg, t_list **stack_a)
 		{
 			num = atoi(str_arr[i]); // array of strings naar array of integers
 			
-			ft_lstadd_back(stack_a, newnode_int(num)); // PROBLEEM: ik moet een void pointer als input hebben, waar ik memory voor moet allocaten
+			ft_lstadd_back(stack_a, newnode_int(num));
 			i++;
 		}
 }

@@ -6,13 +6,49 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/21 20:04:14 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/24 19:59:50 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_lst(t_list **lst) //redo self if time
+int	find_max(t_stack *stack)
+{
+	int	max;
+	t_list *current;
+	
+	current = stack->lst_first;
+	max = current->content;
+	
+	if (!(stack->lst_first) || !(stack))
+		ft_error();
+	max = current->content;
+	while (stack->lst_first)
+	{
+		if (*(int*)stack->lst_first->content > max)
+			max = *(int*)stack->lst_first->content;
+		stack = stack->lst_first->next;
+	}
+	return (max);
+}
+
+int	find_min(t_list *stack)
+{
+	int	min;
+	
+	if (!(stack))
+		ft_error();
+	min = *(int *) stack->content;
+	while (stack)
+	{
+		if (*(int*)stack->content < min)
+			min = *(int*)stack->content;
+		stack = stack->next;
+	}
+	return (min);
+}
+
+void	free_lst(t_list **lst)//redo self if time
 {
 	t_list *tmp;
 
