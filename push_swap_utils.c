@@ -3,47 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/24 19:59:50 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:06:27 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "push_swap.h"
+
+void		ft_sort_3num(t_stack *a)
+{
+	while (*(int *)ft_lstlast(a->lst_first->content) != find_max(a))
+		rotate_a(a, 1);   
+	 if(*(int *)a->lst_first->content != find_min(a))
+		swap_top_a(a, 1);
+}
+
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	if (b < a)
+		return (b);
+	else
+		return(a);
+}
+
+int	ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	if (b < a)
+		return (b);
+	else
+		return(a);
+}
+
 
 int	find_max(t_stack *stack)
 {
 	int	max;
-	t_list *current;
-	
-	current = stack->lst_first;
-	max = current->content;
+	t_list	*current;
 	
 	if (!(stack->lst_first) || !(stack))
 		ft_error();
-	max = current->content;
-	while (stack->lst_first)
+	current = stack->lst_first;
+	max = *(int*)current->content;
+	while (current)
 	{
 		if (*(int*)stack->lst_first->content > max)
 			max = *(int*)stack->lst_first->content;
-		stack = stack->lst_first->next;
+		current = stack->lst_first->next;
 	}
 	return (max);
 }
 
-int	find_min(t_list *stack)
+int	find_min(t_stack *stack)
 {
 	int	min;
+	t_list	*current;
 	
-	if (!(stack))
+	if (!(stack->lst_first) || !(stack))
 		ft_error();
-	min = *(int *) stack->content;
-	while (stack)
+	current = stack->lst_first;
+	min = *(int*)current->content;
+	while (current)
 	{
-		if (*(int*)stack->content < min)
-			min = *(int*)stack->content;
-		stack = stack->next;
+		if (*(int*)stack->lst_first->content < min)
+			min = *(int*)stack->lst_first->content;
+		current = stack->lst_first->next;
 	}
 	return (min);
 }

@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 12:31:10 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/24 19:56:41 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/29 21:21:15 by nboer             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// check de header format
+
 #include "push_swap.h"
 
-// 1. Push two numbers to stack B
-void	init_sort(t_list **stack_a, t_list **stack_b)
+void	init_sort(t_stack *a, t_stack *b)
 {
-	// if ((ft_lstsize(*stack_a) > 3) && (!is_sorted(*stack_a)))
-	// 	push_top_a(stack_a, stack_b);
-	// if ((ft_lstsize(*stack_a) > 3) && (!is_sorted(*stack_a)))
-	// 	push_top_a(stack_a, stack_b);
-	// if ((ft_lstsize(*stack_a) > 3) && (!is_sorted(*stack_a)))
-	//  	sort_abtill3(stack_a, stack_b);
-	if (!is_sorted(*stack_a))
-		printf("sort that shit");
-		// functie die 3 getallen sorteerd van klein naar groot
-	// Nu A nog 3 waardes heeft en deze gesorteerd zijn van klein naar groot, B naar A pushen
+	if ((ft_lstsize((a->lst_first)) > 3) && (!is_sorted(a)))
+		push_top_a(a, b);
+	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
+		push_top_a(a, b);
+	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
+	 	sort_abtill3(a, b);
+	if (ft_lstsize(a->lst_first) == 3 && (!is_sorted(a)))
+		ft_sort_3num(a->lst_first);
+		print_list(a->lst_first);
+		// and then push all numbers from B to A.
 }
 // void	sort_ab_till3(t_list **stack_a, t_list **stack_b)
 // {
@@ -43,6 +44,7 @@ void	init_sort(t_list **stack_a, t_list **stack_b)
 // 		case_arr_brr = ft_max(ft_lstsize(a)-get_index(NUM_A))
 // 	int	case_ar_brr; // A up B down
 // 	int case_arr_br; // A down B up
+// 	// if one of the options is 0, then go for this method. (it cannot be quicker)
 
 // 	// CALCULATE ROTATING COST
 // 	while (a)
@@ -72,18 +74,18 @@ void	init_sort(t_list **stack_a, t_list **stack_b)
 	// 	PLACE ABOVE stack_bMAX --> TARGET NUMBER = b_MAX
 	// 	push_a = stack_bMAX 
 
-int		is_sorted(t_list *stack)
+int		is_sorted(t_stack *stack)
 {
 	int	i;
-	if (!stack)
+	if (!stack->lst_first)
 		ft_error();
-	i = *(int*)stack->content;
-	while (stack)
+	i = *(int*)stack->lst_first->content;
+	while (stack->lst_first)
 	{
-		if (i > *(int*)stack->content)
+		if (i > *(int*)stack->lst_first->content)
 			return (0);
-		i = *(int*)stack->content;
-		stack = stack->next;
+		i = *(int*)stack->lst_first->content;
+		stack->lst_first = stack->lst_first->next;
 	}
 	return (1);
 }

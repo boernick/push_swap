@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:46:35 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/24 19:56:42 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/29 22:12:42 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 // function that checks if there are double numbers in the stack --> this is after list creation
 // function that checks if there are non-alphanumerical? --> this should be before list creation
 
-void	input_single(char*	arg, t_list **stack_a)
+void	init_stack(t_stack *stack)
+{
+	stack->lst_first = NULL;
+	stack->min = 0;
+	stack->max = 0;
+	stack->size = 0;
+}
+
+void	input_single(char*	arg, t_stack *stack_a)
 {
 	char	**str_arr;
 	int	num;
@@ -28,13 +36,12 @@ void	input_single(char*	arg, t_list **stack_a)
 	while (str_arr[i])
 		{
 			num = atoi(str_arr[i]); // array of strings naar array of integers
-			
-			ft_lstadd_back(stack_a, newnode_int(num));
+			ft_lstadd_back(&(stack_a->lst_first), newnode_int(num)); // check of het addfront moet zijn
 			i++;
 		}
 }
 
-void	input_multiple(char **arg, int argc, t_list **stack_a)
+void	input_multiple(char **arg, int argc, t_stack *stack_a)
 {
 	int i;
 	int	num;
@@ -43,12 +50,12 @@ void	input_multiple(char **arg, int argc, t_list **stack_a)
 	while (i < argc)
 	{
 		num = atoi(arg[i]);
-		ft_lstadd_back(stack_a, newnode_int(num)); //<< to be fixed
+		ft_lstadd_back(&(stack_a->lst_first), newnode_int(num)); //<< to be fixed
 		i++;
 	}
 }
 
-int	check_input(int argc, char *argv[])
+int	check_input(int argc, char *argv[]) // add check for alphanumerical
 {
 	if (argc < 2 || !(argv[1]))
 	{

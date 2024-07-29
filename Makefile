@@ -5,7 +5,7 @@ SRCS = push_swap.c push_swap_input.c push_swap_utils.c push_swap_actions.c push_
 OBJS = $(SRCS:.c=.o)
 HEADER = push_swap.h
 
-LIBFT_DIR = /home/nboer/git/push_swap/Libft
+LIBFT_DIR = /home/nick/42Berlin/Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 INCLUDES = -I$(LIBFT_DIR)
