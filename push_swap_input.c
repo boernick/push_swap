@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:46:35 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 22:12:42 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/29 23:08:21 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	input_single(char*	arg, t_stack *stack_a)
 		ft_error();
 	while (str_arr[i])
 		{
-			num = atoi(str_arr[i]); // array of strings naar array of integers
+			num = atoi(str_arr[i]); // array of strings to array of integers
 			ft_lstadd_back(&(stack_a->lst_first), newnode_int(num)); // check of het addfront moet zijn
 			i++;
 		}
@@ -49,7 +49,7 @@ void	input_multiple(char **arg, int argc, t_stack *stack_a)
 	i = 1; //because the 0 index is the file location
 	while (i < argc)
 	{
-		num = atoi(arg[i]);
+		num = ft_atoi(arg[i]);
 		ft_lstadd_back(&(stack_a->lst_first), newnode_int(num)); //<< to be fixed
 		i++;
 	}

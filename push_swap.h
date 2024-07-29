@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 22:05:25 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/29 23:20:14 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				ft_lstsize(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 t_list			*newnode_int(int value);
 void			init_sort(t_stack *a, t_stack *b);
-int				is_sorted(t_list *stack);
+int				is_sorted(t_stack *stack);
 int				get_index(t_list *stack_a, int num);
 void			free_lst(t_list **lst);
 t_list			*ft_lstlast(t_list *lst);
@@ -82,7 +82,7 @@ int				find_max(t_stack *stack);
 int				find_min(t_stack *stack);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
-void			ft_sort_3num(t_list *stack_a);
+void			ft_sort_3num(t_stack *stack_a);
 void			init_stack(t_stack *stack);
 
 //void			sort_ab(t_list **stack_a, t_list **stack_b);

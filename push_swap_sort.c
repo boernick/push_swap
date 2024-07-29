@@ -21,11 +21,14 @@ void	init_sort(t_stack *a, t_stack *b)
 	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
 		push_top_a(a, b);
 	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
-	 	sort_abtill3(a, b);
+	 	// sort_abtill3(a, b);
+		return;
 	if (ft_lstsize(a->lst_first) == 3 && (!is_sorted(a)))
-		ft_sort_3num(a->lst_first);
+	{
+		ft_sort_3num(a);
 		print_list(a->lst_first);
-		// and then push all numbers from B to A.
+	}
+	// and then push all numbers from B to A.
 }
 // void	sort_ab_till3(t_list **stack_a, t_list **stack_b)
 // {

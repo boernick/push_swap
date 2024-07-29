@@ -6,11 +6,10 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 22:06:27 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/29 23:21:33 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
 #include "push_swap.h"
 
 void		ft_sort_3num(t_stack *a)

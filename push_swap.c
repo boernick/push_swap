@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:09 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 22:10:30 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/29 23:02:29 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int argc, char *argv[])
 		printf("%s ", "Stack B before:");
 		print_list((&stack_b)->lst_first);
 		init_sort(&stack_a, &stack_b);
-		
 		printf("%s ", "Stack A after:");
 		print_list((&stack_a)->lst_first);
 		printf("%s ", "Stack B after:");
