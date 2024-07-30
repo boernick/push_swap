@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 23:21:33 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/30 23:10:59 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void		ft_sort_3num(t_stack *a)
 {
-	while (*(int *)ft_lstlast(a->lst_first->content) != find_max(a))
-		rotate_a(a, 1);   
-	 if(*(int *)a->lst_first->content != find_min(a))
+	if (*(int *)a->lst_first->content == find_max(a))
+		rotate_a(a, 1);
+	while (*(int *)(ft_lstlast(a->lst_first))->content != find_max(a))
+		rev_rotate_a(a, 1);
+	if(*(int *)a->lst_first->content != find_min(a))
 		swap_top_a(a, 1);
 }
 
@@ -49,12 +51,12 @@ int	find_max(t_stack *stack)
 	if (!(stack->lst_first) || !(stack))
 		ft_error();
 	current = stack->lst_first;
-	max = *(int*)current->content;
+	max = *(int *)current->content;
 	while (current)
 	{
-		if (*(int*)stack->lst_first->content > max)
-			max = *(int*)stack->lst_first->content;
-		current = stack->lst_first->next;
+		if (*(int *)current->content > max)
+			max = *(int *)current->content;
+		current = current->next;
 	}
 	return (max);
 }
@@ -67,12 +69,12 @@ int	find_min(t_stack *stack)
 	if (!(stack->lst_first) || !(stack))
 		ft_error();
 	current = stack->lst_first;
-	min = *(int*)current->content;
+	min = *(int *)current->content;
 	while (current)
 	{
-		if (*(int*)stack->lst_first->content < min)
-			min = *(int*)stack->lst_first->content;
-		current = stack->lst_first->next;
+		if (*(int *)current->content < min)
+			min = *(int *)current->content;
+		current = current->next;
 	}
 	return (min);
 }

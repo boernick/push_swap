@@ -23,6 +23,8 @@ void	init_sort(t_stack *a, t_stack *b)
 	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
 	 	// sort_abtill3(a, b);
 		return;
+	if (ft_lstsize(a->lst_first) == 2 && (!is_sorted(a)))
+		swap_top_a(a, 1);
 	if (ft_lstsize(a->lst_first) == 3 && (!is_sorted(a)))
 	{
 		ft_sort_3num(a);
@@ -41,18 +43,20 @@ void	init_sort(t_stack *a, t_stack *b)
 // }
 // void	find_cheapest(t_list *a, t_list *b)
 // {
-// 	int case_ar_br; // A up B up
-// 		case_ar_br = ft_max(get_index(a), get_index(b));
-// 	int case_arr_brr; // A down b down
-// 		case_arr_brr = ft_max(ft_lstsize(a)-get_index(NUM_A))
-// 	int	case_ar_brr; // A up B down
-// 	int case_arr_br; // A down B up
-// 	// if one of the options is 0, then go for this method. (it cannot be quicker)
 
-// 	// CALCULATE ROTATING COST
-// 	while (a)
-		
-// 		if (*(int*)a->content < find_max(a))
+// //VOOR ALLE NUMMERS IN A, CHECK HET VOLGENDE:
+// 	//ROTATION COST	
+// 		// TERWIJL A && B_TARGET ARE BOTH NOT INDEX(0)
+// 		int case_ar_br; // A up B up
+// 			case_ar_br = ft_max(get_index(a), get_index(b));
+// 		int case_arr_brr; // A down b down
+// 			case_arr_brr = ft_max(ft_lstsize(a)-get_index(numcheck_a))
+// 		int	case_ar_brr; // A up B down
+// 		int case_arr_br; // A down B up
+
+// 		// if one of the options is 0, then go for this method. (it cannot be quicker)
+
+// 		// CALCULATE ROTATING COST
 		
 // }
 
@@ -62,11 +66,6 @@ void	init_sort(t_stack *a, t_stack *b)
 // 		// if the first number needs 0 actions -> stop finding cheapest and immediate push the number
 // 		// if the index of the checked number < (list length / 2)
 // }
-// //calculate push cost per number
-// find_cheapest(t_list **a)
-// {
-// 	if index_checked_number > (ft_lstsize(a) / 2);
-// )		
 // 	// I need: index cheapest
 // 	// I need: index 
 // }
@@ -79,16 +78,19 @@ void	init_sort(t_stack *a, t_stack *b)
 
 int		is_sorted(t_stack *stack)
 {
+	t_list	*lst_tmp;
 	int	i;
+
 	if (!stack->lst_first)
 		ft_error();
-	i = *(int*)stack->lst_first->content;
+	lst_tmp = stack->lst_first;
+	i = *(int*)lst_tmp->content;
 	while (stack->lst_first)
 	{
-		if (i > *(int*)stack->lst_first->content)
+		if (i > *(int*)lst_tmp->content)
 			return (0);
-		i = *(int*)stack->lst_first->content;
-		stack->lst_first = stack->lst_first->next;
+		i = *(int*)lst_tmp->content;
+		lst_tmp = lst_tmp->next;
 	}
 	return (1);
 }
