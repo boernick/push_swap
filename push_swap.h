@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/31 23:03:02 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/31 23:31:39 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 void			init_stack(t_stack *stack_a);
 void			ft_sort_3num(t_stack *stack_a);
-void			check_stacks(t_stack *a, t_stack *b);
+void			check_stack_a(t_stack *a, t_stack *b);
 void			set_stack(t_stack *stack);
 
 //void			sort_ab(t_list **stack_a, t_list **stack_b);

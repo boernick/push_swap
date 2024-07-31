@@ -22,7 +22,7 @@ void	init_sort(t_stack *a, t_stack *b)
 		push_top_a(a, b);
 	while ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
 	 	{
-		check_stacks(a, b);
+		check_stack_a(a, b);
 		return; // for testing
 		}
 		// move_ab(a, b);
@@ -38,7 +38,7 @@ void	init_sort(t_stack *a, t_stack *b)
 		swap_top_a(a, 1);
 }
 
-void	check_stacks(t_stack *a, t_stack *b)
+void	check_stack_a(t_stack *a, t_stack *b)
 {
 	set_stack(a);
 	set_stack(b);
@@ -67,6 +67,10 @@ void	set_stack(t_stack *stack)
 // int	cost_3;
 
 // //VOOR ALLE NUMMERS IN A, CHECK HET VOLGENDE:
+	//EERST DE TARGETNODE ACHTERHALEN
+		//DUS VOOR ELK NUMMER IN B KIJKEN OF HIJ DICHTSBIJZIJNDE KLEINE NUMMER IS
+
+	//DAN BEREKENEN HOEVEEL HET KOST VOOR ELK NUMMER A EN TARGETB TE SWITCHEN
 // 	//ROTATION COST	
 // 			cost_1 = (ft_max(get_index(a), get_index(b)));
 // 			// waar sla ik de cost op per case?
