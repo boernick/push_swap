@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_actions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/24 19:56:43 by nboer            ###   ########.fr       */
+/*   Updated: 2024/07/31 23:22:54 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	push_top_a(t_stack *stack_a, t_stack *stack_b) //push top a to b
 	stack_a->lst_first = stack_a->lst_first->next;
 	tmp->next = stack_b->lst_first;
 	stack_b->lst_first = tmp;
+	// hier beneden nog testen of incrementation juist gedaan is
+	stack_a->size--;
+	stack_b->size++;
 	write(1, "PA\n", 3);
 }
 
@@ -35,6 +38,8 @@ void	push_top_b(t_stack *stack_b, t_stack *stack_a) //push top b to a
 	stack_b->lst_first = stack_b->lst_first->next;
 	tmp->next = stack_a->lst_first;
 	stack_a->lst_first = tmp;
+	stack_b->size--;
+	stack_a->size++;
 	write(1, "PB\n", 3);
 }
 

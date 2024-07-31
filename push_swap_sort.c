@@ -20,18 +20,37 @@ void	init_sort(t_stack *a, t_stack *b)
 		push_top_a(a, b);
 	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
 		push_top_a(a, b);
-	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
-	 	// sort_abtill3(a, b);
-		return;
-	if (ft_lstsize(a->lst_first) == 2 && (!is_sorted(a)))
-		swap_top_a(a, 1);
+	while ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
+	 	{
+		check_stacks(a, b);
+		return; // for testing
+		}
+		// move_ab(a, b);
 	if (ft_lstsize(a->lst_first) == 3 && (!is_sorted(a)))
 	{
 		ft_sort_3num(a);
 		print_list(a->lst_first);
 	}
-	// and then push all numbers from B to A.
+	// while ((b->lst_first) && (!is_sorted(a)))
+		// init_b(a, b);
+		// move_ba(a, b);
+	if (ft_lstsize(a->lst_first) == 2 && (!is_sorted(a)))
+		swap_top_a(a, 1);
 }
+
+void	check_stacks(t_stack *a, t_stack *b)
+{
+	set_stack(a);
+	set_stack(b);
+}
+
+void	set_stack(t_stack *stack)
+{
+	stack->size = ft_lstsize(stack->lst_first);
+	stack->max = find_max(stack);
+	stack->min = find_min(stack);
+}
+
 // void	sort_ab_till3(t_list **stack_a, t_list **stack_b)
 // {
 // 	// find_cheapest()
@@ -43,12 +62,14 @@ void	init_sort(t_stack *a, t_stack *b)
 // }
 // void	find_cheapest(t_list *a, t_list *b)
 // {
+// int	cost_1;
+// int	cost_2;
+// int	cost_3;
 
 // //VOOR ALLE NUMMERS IN A, CHECK HET VOLGENDE:
 // 	//ROTATION COST	
-// 		// TERWIJL A && B_TARGET ARE BOTH NOT INDEX(0)
-// 		int case_ar_br; // A up B up
-// 			case_ar_br = ft_max(get_index(a), get_index(b));
+// 			cost_1 = (ft_max(get_index(a), get_index(b)));
+// 			// waar sla ik de cost op per case?
 // 		int case_arr_brr; // A down b down
 // 			case_arr_brr = ft_max(ft_lstsize(a)-get_index(numcheck_a))
 // 		int	case_ar_brr; // A up B down

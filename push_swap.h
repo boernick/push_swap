@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 23:20:14 by nick             ###   ########.fr       */
+/*   Updated: 2024/07/31 23:03:02 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,6 @@
 #include <unistd.h>
 // #include "/home/nboer/git/Libft/libft.h"
 #include "/home/nick/42Berlin/push_swap/Libft/libft.h"
-
-// int functie()
-// {
-// 	t_stack	stack;
-// 	int		*i;
-// 	int		*j;
-
-// 	// i = malloc(sizeof(int));
-// 	// j = malloc(sizeof(int));
-// 	// *i = 1;
-// 	// *j = 2;
-// 	// stack.lst_first = ft_lstnew(i);
-	
-// 	ft_lstadd_front(&stack.lst_first, ft_lstnew(j));
-
-// }
 
 typedef struct s_stack
 {
@@ -82,8 +66,10 @@ int				find_max(t_stack *stack);
 int				find_min(t_stack *stack);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
+void			init_stack(t_stack *stack_a);
 void			ft_sort_3num(t_stack *stack_a);
-void			init_stack(t_stack *stack);
+void			check_stacks(t_stack *a, t_stack *b);
+void			set_stack(t_stack *stack);
 
 //void			sort_ab(t_list **stack_a, t_list **stack_b);
 
