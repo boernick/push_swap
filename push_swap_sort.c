@@ -50,6 +50,14 @@ void	set_stack(t_stack *stack)
 
 void	find_target(t_move *current, t_stack *a, t_stack *stack_b)
 {
+		// if one of the options is 0, then go for this method. (it cannot be quicker)
+
+// WHAT IS THE RIGHT SPOT?
+// 	If the number you push from STACK_A to STACK_B is going to be the new biggest or the smallest number, you should place it just above the old biggest number in the STACK_B.
+// 	if (push_a > stack_bMAX || push_a < stack_bMIN)
+// 		PLACE ABOVE stack_bMAX --> TARGET NUMBER = b_MAX
+// 		push_a = stack_bMAX 
+
 	int	checked_num;
 
 	checked_num = get_index(current->index_a);
@@ -139,13 +147,6 @@ void	case_arr_br(t_move *current, t_stack *a, t_stack *b)
 	current->steps_b = current->index_b;
 	current->steps_total = ft_max(current->steps_a, current->steps_b);
 }
-		// if one of the options is 0, then go for this method. (it cannot be quicker)
-
-// WHAT IS THE RIGHT SPOT?
-// 	If the number you push from STACK_A to STACK_B is going to be the new biggest or the smallest number, you should place it just above the old biggest number in the STACK_B.
-// 	if (push_a > stack_bMAX || push_a < stack_bMIN)
-// 		PLACE ABOVE stack_bMAX --> TARGET NUMBER = b_MAX
-// 		push_a = stack_bMAX 
 
 int		ft_min(int a, int b)
 {
