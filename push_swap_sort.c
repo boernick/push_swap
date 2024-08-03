@@ -16,17 +16,14 @@
 
 void	init_sort(t_stack *a, t_stack *b)
 {
-	if ((ft_lstsize((a->lst_first)) > 3) && (!is_sorted(a)))
+	check_stacks(a, b);
+	if ((a->size > 3) && (!is_sorted(a)))
 		push_top_a(a, b);
-	if ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
+	if ((a->size > 3) && (!is_sorted(a)))
 		push_top_a(a, b);
-	while ((ft_lstsize(a->lst_first) > 3) && (!is_sorted(a)))
-	 	{
-		check_stack_a(a, b);
-		return; // for testing
-		}
+	while ((a->size > 3) && (!is_sorted(a)))
 		// move_ab(a, b);
-	if (ft_lstsize(a->lst_first) == 3 && (!is_sorted(a)))
+	if (a->size == 3 && (!is_sorted(a)))
 	{
 		ft_sort_3num(a);
 		print_list(a->lst_first);
@@ -38,7 +35,7 @@ void	init_sort(t_stack *a, t_stack *b)
 		swap_top_a(a, 1);
 }
 
-void	check_stack_a(t_stack *a, t_stack *b)
+void	check_stacks(t_stack *a, t_stack *b)
 {
 	set_stack(a);
 	set_stack(b);
@@ -51,55 +48,120 @@ void	set_stack(t_stack *stack)
 	stack->min = find_min(stack);
 }
 
-// void	sort_ab_till3(t_list **stack_a, t_list **stack_b)
-// {
-// 	// find_cheapest()
-// 	if (checked_number < MIN_B || checked_number > MAX_B)
-// 		targetnumber = MAX_B;
+void	find_target(t_move *current, t_stack *a, t_stack *stack_b)
+{
+	int	checked_num;
+
+	checked_num = get_index(current->index_a);
+	if (checked_num < stack_b->min || checked_num > stack_b->max) // or stack_a->max?
+		return (stack_b->max);
 	
 	
-// 	printf("start sorting");
-// }
-// void	find_cheapest(t_list *a, t_list *b)
-// {
-// int	cost_1;
-// int	cost_2;
-// int	cost_3;
+	printf("start sorting");
+}
 
-// //VOOR ALLE NUMMERS IN A, CHECK HET VOLGENDE:
-	//EERST DE TARGETNODE ACHTERHALEN
-		//DUS VOOR ELK NUMMER IN B KIJKEN OF HIJ DICHTSBIJZIJNDE KLEINE NUMMER IS
+void	find_cheapest(t_stack *a, t_stack *b)
+{
+	t_move	cheapest;
+	t_move	current;
+	t_list	*temp;
 
-	//DAN BEREKENEN HOEVEEL HET KOST VOOR ELK NUMMER A EN TARGETB TE SWITCHEN
-// 	//ROTATION COST	
-// 			cost_1 = (ft_max(get_index(a), get_index(b)));
-// 			// waar sla ik de cost op per case?
-// 		int case_arr_brr; // A down b down
-// 			case_arr_brr = ft_max(ft_lstsize(a)-get_index(numcheck_a))
-// 		int	case_ar_brr; // A up B down
-// 		int case_arr_br; // A down B up
+	cheapest.steps_total = INT_MAX;
+	current.index_a = 0;
+	temp = a->lst_first;
+	while (temp) //ga door alle A nummers heen om te kijken wat het goedkoopste nummer is
+	{
+		current.index_b = find_target(&current, b);
+		find_cheapest_way(&current, a, b);
+		if (current.steps_total < cheapest.steps_total)
+			set_move(&cheapest, &current); //kopieert alle waardes van current naar cheapest
+		current.index_a++;
+		temp = temp->next;
+	}
+}
+void	set_move(t_move *cheapest, t_move *current)
+{
+	cheapest->steps_a = current->steps_a;
+	cheapest->steps_b = current->steps_b;
+	cheapest->direction_a = current->direction_a;
+	cheapest->direction_b = current->direction_b;
+	cheapest->steps_total = current->steps_total;
+}
 
-// 		// if one of the options is 0, then go for this method. (it cannot be quicker)
+void	find_cheapest_way(t_move *current, t_stack *a, t_stack *b)
+{
+	int cost;
 
-// 		// CALCULATE ROTATING COST
-		
-// }
+	current->steps_total = INT_MAX;
+	cost = ft_max(current->index_a, current->index_b); 
+	if (cost <= current->steps_total)
+		case_ar_br(current); // A up B up
+	cost = ft_max((a->size - current->index_a), (b->size - current->index_b));
+	if (cost < current->steps_total)
+		case_arr_brr(current, a, b); // A down B down
+	cost = ft_max((current->index_a), (b->size - current->index_b));
+	if (cost < current->steps_total)
+		case_ar_brr(current, a, b); // A up B down
+	cost = ft_max((current->index_a), (b->size - current->index_b));
+	if (cost < current->steps_total)
+		case_arr_br(current, a, b); // A down B up
+}
+void	case_ar_br(t_move *current)
+{
+	current->direction_a = 1;
+	current->direction_b = 1;
+	current->steps_a = current->index_a;
+	current->steps_b = current->index_b;
+	current->steps_total = ft_max(current->steps_a, current->steps_b);
+}
+void	case_arr_brr(t_move *current, t_stack *a, t_stack *b)
+{
+	current->direction_a = 0;
+	current->direction_b = 0;
+	current->steps_a = (a->size - current->index_a);
+	current->steps_b = (b->size - current->index_b);
+	current->steps_total = ft_max(current->steps_a, current->steps_b);
+}
+void	case_ar_brr(t_move *current, t_stack *a, t_stack *b)
+{
+	current->direction_a = 1;
+	current->direction_b = 0;
+	current->steps_a = current->index_a;
+	current->steps_b = (b->size - current->index_b);
+	current->steps_total = ft_max(current->steps_a, current->steps_b);
+}
 
-// void	sort_ba(t_list **stack_a, t_list **stack_b)
-// {
-// 	//find_cheapest()
-// 		// if the first number needs 0 actions -> stop finding cheapest and immediate push the number
-// 		// if the index of the checked number < (list length / 2)
-// }
-// 	// I need: index cheapest
-// 	// I need: index 
-// }
+void	case_arr_br(t_move *current, t_stack *a, t_stack *b)
+{
+	current->direction_a = 0;
+	current->direction_b = 1;
+	current->steps_a = (a->size - current->index_a);
+	current->steps_b = current->index_b;
+	current->steps_total = ft_max(current->steps_a, current->steps_b);
+}
+		// if one of the options is 0, then go for this method. (it cannot be quicker)
 
 // WHAT IS THE RIGHT SPOT?
-	// If the number you push from STACK_A to STACK_B is going to be the new biggest or the smallest number, you should place it just above the old biggest number in the STACK_B.
-	// if (push_a > stack_bMAX || push_a < stack_bMIN)
-	// 	PLACE ABOVE stack_bMAX --> TARGET NUMBER = b_MAX
-	// 	push_a = stack_bMAX 
+// 	If the number you push from STACK_A to STACK_B is going to be the new biggest or the smallest number, you should place it just above the old biggest number in the STACK_B.
+// 	if (push_a > stack_bMAX || push_a < stack_bMIN)
+// 		PLACE ABOVE stack_bMAX --> TARGET NUMBER = b_MAX
+// 		push_a = stack_bMAX 
+
+int		ft_min(int a, int b)
+{
+	if (a < b)
+		return a;
+	if (b < a)
+		return b;
+}
+
+int		ft_max(int a, int b)
+{
+	if (a > b)
+		return a;
+	if (b > a)
+		return b;
+}
 
 int		is_sorted(t_stack *stack)
 {
@@ -120,17 +182,31 @@ int		is_sorted(t_stack *stack)
 	return (1);
 }
 
-int	get_index(t_list *stack_a, int num)
+int	get_index(t_stack *stack, int index) // get the value at a specific index
+{
+	int		i;
+	t_list	*temp;
+
+	temp = stack->lst_first;
+	while (i < index)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (temp->content)
+}
+
+int	find_index(t_list *stack, int num) //find the index of a particular value
 {
 	int		i;
 	
 	i = 0;
-	while (stack_a)
+	while (stack)
 	{
-		if (num == *(int *)stack_a->content)
+		if (num == *(int *)stack->content)
 			return (i);
 		i++;
-		stack_a = stack_a->next;
+		stack = stack->next;
 	}
 	ft_error();
 	return (-1);

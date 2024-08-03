@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/31 23:31:39 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/03 23:24:12 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-// #include "/home/nboer/git/Libft/libft.h"
-#include "/home/nick/42Berlin/push_swap/Libft/libft.h"
+#include <limits.h>
+#include "/home/nboer/git/Libft/libft.h"
+// #include "/home/nick/42Berlin/push_swap/Libft/libft.h"
 
 typedef struct s_stack
 {
@@ -27,14 +28,15 @@ typedef struct s_stack
 	int					size;
 }	t_stack;
 
-typedef struct s_move
+typedef struct s_move //overschrijven zodra er een goedkopere move is gevonden
 {
-	int					pos_a;
-	int					pos_b;
-	int					direction_a;
-	int					direction_b;
-	int					steps_a;
-	int					steps_b;
+	int					index_a; // de goedkoopste node om te pushen?
+	int					index_b; // de node waarnaar toe te pushen
+	int					direction_a; // richting om de goedkoopste node in A bovenaan de lijst te krijgen
+	int					direction_b; // richting om de goedkoopste node in B bovenaan de lijst te krijgen
+	int					steps_a; // aantal stappen A...
+	int					steps_b; // aantal stappen B
+	int					steps_total; // gezamenlijk ()
 }	t_move;
 
 int				check_input(int argc, char *argv[]);
@@ -58,7 +60,7 @@ void			ft_lstadd_back(t_list **lst, t_list *new);
 t_list			*newnode_int(int value);
 void			init_sort(t_stack *a, t_stack *b);
 int				is_sorted(t_stack *stack);
-int				get_index(t_list *stack_a, int num);
+int				get_index(t_stack *stack, int index);
 void			free_lst(t_list **lst);
 t_list			*ft_lstlast(t_list *lst);
 int				ft_lstsize(t_list *lst);
@@ -70,6 +72,8 @@ void			init_stack(t_stack *stack_a);
 void			ft_sort_3num(t_stack *stack_a);
 void			check_stack_a(t_stack *a, t_stack *b);
 void			set_stack(t_stack *stack);
+void			find_cheapest_way(t_move *current, t_stack *a, t_stack *b);
+void			find_target(t_move *current, t_stack *a, t_stack *stack_b)
 
 //void			sort_ab(t_list **stack_a, t_list **stack_b);
 
