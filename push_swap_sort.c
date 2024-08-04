@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 12:31:10 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/29 21:21:15 by nboer             ###   ########.fr       */
+/*   Created: 2024/08/04 17:05:33 by nboer             #+#    #+#             */
+/*   Updated: 2024/08/04 19:06:32 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@
 
 void	init_sort(t_stack *a, t_stack *b)
 {
-	t_move	cheapest;
+	t_move	cheapest; // CHECK IF THE CHEAPEST IS RESET AFTER MOVING 
 
 	check_stacks(a, b);
-	if ((a->size > 3) && (!is_sorted(a)))
-		push_top_a(a, b);
+	// if ((a->size > 3) && (!is_sorted(a)))
+	// 	push_top_a(a, b);
 	if ((a->size > 3) && (!is_sorted(a)))
 		push_top_a(a, b);
 	while ((a->size > 3) && (!is_sorted(a)))
 	{
 		find_cheapest(a, b, &cheapest);
 		move_cheapest(a, b, &cheapest);
+		push_top_a(a, b);
+		print_list(b->lst_first);
 	}
 	if (a->size == 3 && (!is_sorted(a)))
 	{
@@ -41,22 +43,92 @@ void	init_sort(t_stack *a, t_stack *b)
 }
 void	move_cheapest(t_stack *a, t_stack *b, t_move *cheapest)
 {
-	int	i;
-	
-	i = 0;
 	if (cheapest->dir_a == 1 && cheapest->dir_b == 1)
-		while (i < ft_min(cheapest->steps_a, cheapest->steps_b))
-		{
-			rotate_both(a, b);
-			i++;
-		}
-
+		do_move_r_both(a, b, cheapest);
 	else if (cheapest->dir_a == 0 && cheapest->dir_b == 0)
-
+		do_move_rr_both(a, b, cheapest);
 	else if (cheapest->dir_a == 1 && cheapest->dir_b == 0)
+		do_move_ar_brr(a, b, cheapest);
 	else if (cheapest->dir_a == 0 && cheapest->dir_b == 1)
+		do_move_arr_br(a, b, cheapest);
 	else
 		ft_error();
+}
+void	do_move_r_both(t_stack *a, t_stack *b, t_move *cheapest)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_min(cheapest->steps_a, cheapest->steps_b))
+	{
+		rotate_both(a, b);
+		i++;
+	}
+	while (i < ft_max(cheapest->steps_a, cheapest->steps_b))
+	{
+		if (cheapest->steps_a > cheapest->steps_b)
+			rotate_a(a, 1);
+		if (cheapest->steps_b > cheapest->steps_a)
+			rotate_b(b, 1);
+		i++;
+	}
+}
+
+void	do_move_rr_both(t_stack *a, t_stack *b, t_move *cheapest)
+{
+		int	i;
+		
+		i = 0;
+		while (i < ft_min(cheapest->steps_a, cheapest->steps_b))
+		{
+			rev_rotate_both(a, b);
+			i++;
+		}
+		while (i < ft_max(cheapest->steps_a, cheapest->steps_b))
+		{
+			if (cheapest->steps_a > cheapest->steps_b)
+				rev_rotate_a(a, 1);
+			if (cheapest->steps_b > cheapest->steps_a)
+				rev_rotate_b(b, 1);
+			i++;
+		}
+}
+
+void	do_move_ar_brr(t_stack *a, t_stack *b, t_move *cheapest)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < cheapest->steps_a)
+	{
+		rotate_a(a, 1);
+		i++;
+	}
+	while (j < cheapest->steps_b)
+	{
+		rev_rotate_b(b, 1);
+		j++;
+	}
+}
+void	do_move_arr_br(t_stack *a, t_stack *b, t_move *cheapest)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < cheapest->steps_a)
+	{
+		rev_rotate_a(a, 1);
+		i++;
+	}
+	while (j < cheapest->steps_b)
+	{
+		rotate_b(b, 1);
+		j++;
+	}
 }
 
 void	check_stacks(t_stack *a, t_stack *b)
@@ -83,7 +155,7 @@ int		find_target_index(t_move *current, t_stack *a, t_stack *stack_b)
 
 	checknum = get_index(a, current->index_a);
 	if (checknum < stack_b->min || checknum > stack_b->max) // or stack_a->max?
-		return (find_index(stack_b->lst_first, stack_b->max));
+		return (find_index(stack_b->lst_first, stack_b->max)); // VOLGENS MIJ KLOPT DEZE NIET
 	first_smaller = INT_MIN; // this might be false!
 	temp = stack_b->lst_first;
 	while (temp)
@@ -100,10 +172,10 @@ void	find_cheapest(t_stack *a, t_stack *b, t_move *cheapest)
 	t_move	current;
 	t_list	*temp;
 
-	cheapest->steps_total = INT_MAX;
+	cheapest->steps_total = INT_MAX; //CHANGE LATER TO LONG
 	current.index_a = 0;
 	temp = a->lst_first;
-	while (temp) //ga door alle A nummers heen om te kijken wat het goedkoopste nummer is
+	while (temp) 
 	{
 		current.index_b = find_target_index(&current, a, b);
 		find_cheapest_way(&current, a, b);

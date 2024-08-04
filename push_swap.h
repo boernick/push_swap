@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 16:04:55 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/04 17:54:21 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_move //overschrijven zodra er een goedkopere move is gevonden
 {
 	int					index_a; // de goedkoopste node om te pushen?
 	int					index_b; // de node waarnaar toe te pushen
-	int					direction_a; // richting om de goedkoopste node in A bovenaan de lijst te krijgen
-	int					direction_b; // richting om de goedkoopste node in B bovenaan de lijst te krijgen
+	int					dir_a; // richting om de goedkoopste node in A bovenaan de lijst te krijgen
+	int					dir_b; // richting om de goedkoopste node in B bovenaan de lijst te krijgen
 	int					steps_a; // aantal stappen A...
 	int					steps_b; // aantal stappen B
 	int					steps_total; // gezamenlijk ()
@@ -82,6 +82,9 @@ void			case_arr_brr(t_move *current, t_stack *a, t_stack *b);
 void			case_ar_brr(t_move *current, t_stack *b);
 void			case_arr_br(t_move *current, t_stack *a);
 void			move_cheapest(t_stack *a, t_stack *b, t_move *cheapest);
-
+void			do_move_r_both(t_stack *a, t_stack *b, t_move *cheapest);
+void			do_move_rr_both(t_stack *a, t_stack *b, t_move *cheapest);
+void			do_move_ar_brr(t_stack *a, t_stack *b, t_move *cheapest);
+void			do_move_arr_br(t_stack *a, t_stack *b, t_move *cheapest);
 
 #endif
