@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/07/31 23:22:51 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:44:47 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		ft_sort_3num(t_stack *a)
+void	ft_sort_3num(t_stack *a)
 {
 	if (*(int *)a->lst_first->content == find_max(a))
 		rotate_a(a, 1);
@@ -21,27 +21,6 @@ void		ft_sort_3num(t_stack *a)
 	if(*(int *)a->lst_first->content != find_min(a))
 		swap_top_a(a, 1);
 }
-
-int	ft_max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	if (b < a)
-		return (b);
-	else
-		return(a);
-}
-
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	if (b < a)
-		return (b);
-	else
-		return(a);
-}
-
 
 int	find_max(t_stack *stack)
 {
@@ -63,9 +42,9 @@ int	find_max(t_stack *stack)
 
 int	find_min(t_stack *stack)
 {
-	int	min;
+	int		min;
 	t_list	*current;
-	
+		
 	if (!(stack->lst_first) || !(stack))
 		ft_error();
 	current = stack->lst_first;
@@ -79,7 +58,7 @@ int	find_min(t_stack *stack)
 	return (min);
 }
 
-void	free_lst(t_list **lst)//redo self if time
+void	free_lst(t_list **lst)
 {
 	t_list *tmp;
 

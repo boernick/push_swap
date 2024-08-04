@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/03 23:24:12 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/04 16:04:55 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,18 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 void			init_stack(t_stack *stack_a);
 void			ft_sort_3num(t_stack *stack_a);
-void			check_stack_a(t_stack *a, t_stack *b);
+void			check_stacks(t_stack *a, t_stack *b);
 void			set_stack(t_stack *stack);
+void			find_cheapest(t_stack *a, t_stack *b, t_move *cheapest);
 void			find_cheapest_way(t_move *current, t_stack *a, t_stack *b);
-void			find_target(t_move *current, t_stack *a, t_stack *stack_b)
+int				find_target_index(t_move *current, t_stack *a, t_stack *stack_b);
+void			set_move(t_move *cheapest, t_move *current);
+int				find_index(t_list *stack, int num);
+void			case_ar_br(t_move *current);
+void			case_arr_brr(t_move *current, t_stack *a, t_stack *b);
+void			case_ar_brr(t_move *current, t_stack *b);
+void			case_arr_br(t_move *current, t_stack *a);
+void			move_cheapest(t_stack *a, t_stack *b, t_move *cheapest);
 
-//void			sort_ab(t_list **stack_a, t_list **stack_b);
 
 #endif

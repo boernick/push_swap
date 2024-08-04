@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/03 22:53:24 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/04 16:54:14 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,16 @@ void	push_top_a(t_stack *stack_a, t_stack *stack_b) //push top a to b
 		return ;
 	tmp = stack_a->lst_first;
 	stack_a->lst_first = stack_a->lst_first->next;
-	tmp->next = stack_b->lst_first;
-	stack_b->lst_first = tmp;
-	// hier beneden nog testen of incrementation juist gedaan is
+	if (!stack_b->lst_first)
+	{
+		stack_b->lst_first = tmp;
+		tmp->next = NULL;
+	}
+	else
+	{
+		tmp->next = stack_b->lst_first;
+		stack_b->lst_first = tmp;
+	}
 	stack_a->size--;
 	stack_b->size++;
 	check_stacks(stack_a, stack_b);
