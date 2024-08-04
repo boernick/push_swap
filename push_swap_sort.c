@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:05:33 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 19:06:32 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/04 23:16:05 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 void	init_sort(t_stack *a, t_stack *b)
 {
-	t_move	cheapest; // CHECK IF THE CHEAPEST IS RESET AFTER MOVING 
+	t_move	cheapest;
 
 	check_stacks(a, b);
-	// if ((a->size > 3) && (!is_sorted(a)))
-	// 	push_top_a(a, b);
+	if ((a->size > 3) && (!is_sorted(a)))
+		push_top_a(a, b);
 	if ((a->size > 3) && (!is_sorted(a)))
 		push_top_a(a, b);
 	while ((a->size > 3) && (!is_sorted(a)))
@@ -28,19 +28,44 @@ void	init_sort(t_stack *a, t_stack *b)
 		find_cheapest(a, b, &cheapest);
 		move_cheapest(a, b, &cheapest);
 		push_top_a(a, b);
-		print_list(b->lst_first);
 	}
 	if (a->size == 3 && (!is_sorted(a)))
-	{
 		ft_sort_3num(a);
-		print_list(a->lst_first);
+	while ((b->lst_first) && (!is_sorted(a)))
+	{	
+		find_target_index_a(a, b, &cheapest);
+		move_target_a();
+		push_top_b(a, b);
 	}
-	// while ((b->lst_first) && (!is_sorted(a)))
-		// init_b(a, b);
-		// move_ba(a, b);
 	if (ft_lstsize(a->lst_first) == 2 && (!is_sorted(a)))
 		swap_top_a(a, 1);
 }
+void	find_target_index_a(t_stack *a, t_stack *b, t_move *cheapest)
+{
+	int		checknum;
+	int		first_bigger;
+	int		i;
+	t_list	*temp;
+
+	i = 0;
+	checknum = b->lst_first;
+	first_bigger = INT_MAX;
+	temp = a->lst_first;
+	if (checknum < a->min || checknum > a->max)
+		cheapest->index_a = find_index(a->lst_first, a->max);
+	else
+		while (temp)
+		{
+			if (*(int *)temp->content > checknum && *(int *)temp->content < first_bigger)
+			{
+				first_bigger = *(int *)temp->content;
+				cheapest->index_a = i;
+			}
+			i++;
+			temp = temp->next;
+		}
+}
+
 void	move_cheapest(t_stack *a, t_stack *b, t_move *cheapest)
 {
 	if (cheapest->dir_a == 1 && cheapest->dir_b == 1)
@@ -154,7 +179,7 @@ int		find_target_index(t_move *current, t_stack *a, t_stack *stack_b)
 	int		first_smaller;
 
 	checknum = get_index(a, current->index_a);
-	if (checknum < stack_b->min || checknum > stack_b->max) // or stack_a->max?
+	if (checknum < stack_b->min || checknum > stack_b->max)
 		return (find_index(stack_b->lst_first, stack_b->max)); // VOLGENS MIJ KLOPT DEZE NIET
 	first_smaller = INT_MIN; // this might be false!
 	temp = stack_b->lst_first;
