@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:05:33 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/05 19:15:35 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/05 21:56:27 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_sort(t_stack *a, t_stack *b)
 		min_first(a);
 	if (ft_lstsize(a->lst_first) == 2 && (!is_sorted(a)))
 		swap_top_a(a, 1);
+	//free
 }
 
 void	min_first(t_stack *a)

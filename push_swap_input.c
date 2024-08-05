@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:46:35 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 15:25:59 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/05 21:45:30 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // function that checks if there are double numbers in the stack --> this is after list creation
 // function that checks if there are non-alphanumerical? --> this should be before list creation
+// check for white spaces
 
 void	init_stack(t_stack *stack)
 {

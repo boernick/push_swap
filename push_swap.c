@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 15:21:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 15:34:35 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/05 21:53:05 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // IMPORTANT NOTE: BEFORE SUBMITTING, REMOVE THE -g (FOR DEBUGGING) FROM THE MAKEFILE
+// 1. CHECK INPUTS FOR DOUBLE NUMBERS, WHITE SPACES, ETC
+// 2. CHECK TO FREE UP ALL THE MEMORY DYNAMICALLY ALLOCATED
+// 3. CHECK FOR INTEGER OVERFLOW.
 
 int	main(int argc, char *argv[])
 {
