@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_actions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 16:54:14 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/05 18:24:47 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	push_top_b(t_stack *stack_b, t_stack *stack_a) //push top b to a
 {
 	t_list	*tmp;
 
-	if (stack_b->lst_first == NULL || stack_a == NULL || stack_a == NULL)
+	if (stack_b->lst_first == NULL || stack_a == NULL)
 		return ;
 	tmp = stack_b->lst_first;
 	stack_b->lst_first = stack_b->lst_first->next;

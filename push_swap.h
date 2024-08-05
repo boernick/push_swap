@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 21:05:05 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/05 19:04:49 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ void			do_move_r_both(t_stack *a, t_stack *b, t_move *cheapest);
 void			do_move_rr_both(t_stack *a, t_stack *b, t_move *cheapest);
 void			do_move_ar_brr(t_stack *a, t_stack *b, t_move *cheapest);
 void			do_move_arr_br(t_stack *a, t_stack *b, t_move *cheapest);
+void			move_target_a(t_stack *a, t_move *cheapest);
+void			find_target_index_a(t_stack *a, t_stack *b, t_move *cheapest);
+void			min_first(t_stack *a);
 
 #endif

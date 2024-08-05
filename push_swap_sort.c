@@ -6,7 +6,7 @@
 /*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:05:33 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 23:16:05 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/05 19:15:35 by nick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,65 @@ void	init_sort(t_stack *a, t_stack *b)
 	}
 	if (a->size == 3 && (!is_sorted(a)))
 		ft_sort_3num(a);
-	while ((b->lst_first) && (!is_sorted(a)))
+	while (b->lst_first != NULL)
 	{	
 		find_target_index_a(a, b, &cheapest);
-		move_target_a();
-		push_top_b(a, b);
+		move_target_a(a, &cheapest);
+		push_top_b(b, a);
 	}
+		min_first(a);
 	if (ft_lstsize(a->lst_first) == 2 && (!is_sorted(a)))
 		swap_top_a(a, 1);
 }
+
+void	min_first(t_stack *a)
+{
+	int	index_min;
+	int i;
+	
+	i = 0;
+	index_min = find_index(a->lst_first, a->min);
+	if (index_min < (a->size/2))
+	{
+		while (i < index_min)
+		{
+			rotate_a(a, 1);
+			i++;
+		}
+	}
+	else
+	{
+		while (i < (a->size - index_min))
+		{
+			rev_rotate_a(a, 1);
+			i++;
+		}
+	}
+}
+
+void	move_target_a(t_stack *a, t_move *cheapest)
+{
+	int	i;
+	
+	i = 0;
+	if (cheapest->index_a <= (a->size/2)) // als nummer voor de het midden staat, beweeg omhoog
+	{
+		while (i < cheapest->index_a)
+		{
+			rotate_a(a, 1);
+			i++;
+		}
+	}
+	else // anders, beweeg omlaag
+	{
+		while (i < (a->size - cheapest->index_a))
+		{
+			rev_rotate_a(a, 1);
+			i++;
+		}
+	}
+}
+
 void	find_target_index_a(t_stack *a, t_stack *b, t_move *cheapest)
 {
 	int		checknum;
@@ -48,11 +98,11 @@ void	find_target_index_a(t_stack *a, t_stack *b, t_move *cheapest)
 	t_list	*temp;
 
 	i = 0;
-	checknum = b->lst_first;
+	checknum = *(int *)b->lst_first->content;
 	first_bigger = INT_MAX;
 	temp = a->lst_first;
 	if (checknum < a->min || checknum > a->max)
-		cheapest->index_a = find_index(a->lst_first, a->max);
+		cheapest->index_a = find_index(a->lst_first, a->min);
 	else
 		while (temp)
 		{
@@ -64,6 +114,7 @@ void	find_target_index_a(t_stack *a, t_stack *b, t_move *cheapest)
 			i++;
 			temp = temp->next;
 		}
+
 }
 
 void	move_cheapest(t_stack *a, t_stack *b, t_move *cheapest)
@@ -298,11 +349,11 @@ int		is_sorted(t_stack *stack)
 		ft_error();
 	lst_tmp = stack->lst_first;
 	i = *(int*)lst_tmp->content;
-	while (stack->lst_first)
+	while (lst_tmp)
 	{
-		if (i > *(int*)lst_tmp->content)
+		if (i > *(int *)lst_tmp->content)
 			return (0);
-		i = *(int*)lst_tmp->content;
+		i = *(int *)lst_tmp->content;
 		lst_tmp = lst_tmp->next;
 	}
 	return (1);
