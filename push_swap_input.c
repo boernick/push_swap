@@ -3,18 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:46:35 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/05 21:45:30 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/07 19:17:27 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// function that checks if there are double numbers in the stack --> this is after list creation
-// function that checks if there are non-alphanumerical? --> this should be before list creation
-// check for white spaces
+int	check_input(int argc, char *argv[])
+{
+	long	num;
+	int		i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if (check_str(argv[i]))
+			return (0);
+		num = atol(argv[i]);
+		if (num > INT_MAX || num < INT_MIN)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_str(char *str)
+{
+	if (!(*str == '+' || *str == '-' || (*str >= '0' && *str <= '9')))
+		return (1);
+	if ((*str == '+' || *str == '-') && !(str[1] >= '0' && str[1] <= '9'))
+		return (1);
+	str++;
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9'))
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+int	ft_atol(const char *nptr)
+{
+	int		i;
+	int		is_neg;
+	long	num;
+
+	i = 0;
+	is_neg = 1;
+	num = 0;
+	while ((nptr[i] == 32) || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			is_neg *= -1;
+		i++;
+	}
+	while ((nptr[i] >= '0') && (nptr[i] <= '9'))
+	{
+		num = 10 * num + nptr[i] - '0';
+		i++;
+	}
+	return (is_neg * num);
+}
+
+int	find_dup(t_stack *a)
+{
+	t_list	*tmp;
+	t_list	*tmp_dup;
+	int		check_num;
+
+	if (!a || !a->lst_first)
+		ft_error();
+	tmp = a->lst_first;
+	while (tmp)
+	{
+		check_num = *(int *)tmp->content;
+		tmp_dup = tmp->next;
+		while (tmp_dup)
+		{
+			if (check_num == *(int *)tmp_dup->content)
+				ft_error_free(a);
+			tmp_dup = tmp_dup->next;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
 
 void	init_stack(t_stack *stack)
 {
@@ -24,44 +103,41 @@ void	init_stack(t_stack *stack)
 	stack->size = 0;
 }
 
-void	input_single(char*	arg, t_stack *stack_a)
+int	arrlen(char **arr)
 {
-	char	**str_arr;
-	int	num;
 	int	i;
 
 	i = 0;
-	str_arr = ft_split(arg, ' '); // don't forget to free later
-	if (*str_arr == NULL) // Check if ft_split succeeded
-		ft_error();
-	while (str_arr[i])
-		{
-			num = atoi(str_arr[i]); // array of strings to array of integers
-			ft_lstadd_back(&(stack_a->lst_first), newnode_int(num)); // check of het addfront moet zijn
-			i++;
-		}
+	while (arr[i])
+		i++;
+	return (i);
 }
 
 void	input_multiple(char **arg, int argc, t_stack *stack_a)
 {
-	int i;
+	int	i;
 	int	num;
-	
-	i = 1; //because the 0 index is the file location
-	while (i < argc)
-	{
-		num = ft_atoi(arg[i]);
-		ft_lstadd_back(&(stack_a->lst_first), newnode_int(num)); //<< to be fixed
-		i++;
-	}
-}
+	int	count;
 
-int	check_input(int argc, char *argv[]) // add check for alphanumerical
-{
-	if (argc < 2 || !(argv[1]))
+	i = 0;
+	if (argc == 1)
 	{
-		ft_error();
-		return (0);
+		arg = ft_split(arg[0], ' ');
+		count = arrlen(arg);
 	}
-	return (1);
+	else 
+		count = argc;
+	if (arg == NULL || !check_input(count, arg))
+	{
+		if (argc == 1)
+			ft_free_arr(arg);
+		ft_error();
+	}
+	while (i < count)
+	{
+		num = ft_atoi(arg[i++]);
+		ft_lstadd_back(&(stack_a->lst_first), newnode_int(num));
+	}
+	if (argc == 1)
+		ft_free_arr(arg);
 }

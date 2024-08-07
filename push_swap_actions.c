@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_actions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nick <nick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:20:47 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/05 18:24:47 by nick             ###   ########.fr       */
+/*   Updated: 2024/08/07 20:05:42 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_top_a(t_stack *stack_a, t_stack *stack_b) //push top a to b
+void	push_top_a(t_stack *stack_a, t_stack *stack_b)
 {
 	t_list	*tmp;
 
@@ -33,10 +33,10 @@ void	push_top_a(t_stack *stack_a, t_stack *stack_b) //push top a to b
 	stack_a->size--;
 	stack_b->size++;
 	check_stacks(stack_a, stack_b);
-	write(1, "PA\n", 3);
+	write(1, "pb\n", 3);
 }
 
-void	push_top_b(t_stack *stack_b, t_stack *stack_a) //push top b to a
+void	push_top_b(t_stack *stack_b, t_stack *stack_a)
 {
 	t_list	*tmp;
 
@@ -49,10 +49,10 @@ void	push_top_b(t_stack *stack_b, t_stack *stack_a) //push top b to a
 	stack_b->size--;
 	stack_a->size++;
 	check_stacks(stack_a, stack_b);
-	write(1, "PB\n", 3);
+	write(1, "pa\n", 3);
 }
 
-void	swap_top_a(t_stack *stack, int j) //swap first A node with second A node 
+void	swap_top_a(t_stack *stack, int j)
 {
 	t_list	*first;
 	t_list	*second;
@@ -65,10 +65,10 @@ void	swap_top_a(t_stack *stack, int j) //swap first A node with second A node
 	second->next = first;
 	stack->lst_first = second;
 	if (j == 1)
-		write(1, "SA\n", 3);
+		write(1, "sa\n", 3);
 }
 
-void	swap_top_b(t_stack *stack, int j) //swap first B node with second B node 
+void	swap_top_b(t_stack *stack, int j)
 {
 	t_list	*first;
 	t_list	*second;
@@ -81,10 +81,10 @@ void	swap_top_b(t_stack *stack, int j) //swap first B node with second B node
 	second->next = first;
 	stack->lst_first = second;
 	if (j == 1)
-		write(1, "SB\n", 3);
+		write(1, "sb\n", 3);
 }
 
-void	swap_top_both(t_stack *stack_a, t_stack *stack_b) // Swap both first nodes of A&B with the second nodes of both A&B
+void	swap_top_both(t_stack *stack_a, t_stack *stack_b)
 {
 	if ((stack_a->lst_first) == NULL || (stack_b->lst_first) == NULL)
 		return ;
@@ -93,7 +93,7 @@ void	swap_top_both(t_stack *stack_a, t_stack *stack_b) // Swap both first nodes 
 	write(1, "SS\n", 3);
 }
 
-void	rotate_a(t_stack *stack, int j) //The first A element becomes the last one.
+void	rotate_a(t_stack *stack, int j)
 {
 	t_list	*first;
 	t_list	*last;
@@ -106,10 +106,10 @@ void	rotate_a(t_stack *stack, int j) //The first A element becomes the last one.
 	last->next = first;
 	first->next = NULL;
 	if (j == 1)
-		write(1, "RA\n", 3);
+		write(1, "ra\n", 3);
 }
 
-void	rotate_b(t_stack *stack, int j) //The first B element becomes the last one.
+void	rotate_b(t_stack *stack, int j)
 {
 	t_list	*first;
 	t_list	*last;
@@ -122,22 +122,24 @@ void	rotate_b(t_stack *stack, int j) //The first B element becomes the last one.
 	last->next = first;
 	first->next = NULL;
 	if (j == 1)
-		write(1, "RB\n", 3);
+		write(1, "rb\n", 3);
 }
 
-void	rotate_both(t_stack *lst_a, t_stack *lst_b) //THe first A becomes last A, first B becomes last B
+void	rotate_both(t_stack *lst_a, t_stack *lst_b)
 {
 	rotate_a(lst_a, 0);
 	rotate_b(lst_b, 0);
-	write(1, "RR\n", 3);
+	write(1, "rr\n", 3);
 }
-void	rev_rotate_a(t_stack *stack, int j) //The last A element becomes the first one.
+
+void	rev_rotate_a(t_stack *stack, int j)
 {
 	t_list	*second_last;
 	t_list	*last;
 
-	if (stack->lst_first == NULL || stack == NULL || stack->lst_first->next == NULL)
-		return;
+	if (stack->lst_first == NULL || stack == NULL || 
+		stack->lst_first->next == NULL)
+		return ;
 	last = stack->lst_first;
 	while (last->next != NULL)
 	{
@@ -148,16 +150,17 @@ void	rev_rotate_a(t_stack *stack, int j) //The last A element becomes the first 
 	last->next = stack->lst_first;
 	stack->lst_first = last;
 	if (j == 1)
-		write(1, "RRA\n", 4);
+		write(1, "rra\n", 4);
 }
 
-void	rev_rotate_b(t_stack *stack, int j) //The last B element becomes the first one.
+void	rev_rotate_b(t_stack *stack, int j)
 {
 	t_list	*second_last;
 	t_list	*last;
 
-	if (stack->lst_first == NULL || stack == NULL || stack->lst_first->next == NULL)
-		return;
+	if (stack->lst_first == NULL || stack == NULL || 
+		stack->lst_first->next == NULL)
+		return ;
 	last = stack->lst_first;
 	while (last->next != NULL)
 	{
@@ -168,12 +171,12 @@ void	rev_rotate_b(t_stack *stack, int j) //The last B element becomes the first 
 	last->next = stack->lst_first;
 	stack->lst_first = last;
 	if (j == 1)
-		write(1, "RRB\n", 4);
+		write(1, "rrb\n", 4);
 }
 
-void	rev_rotate_both(t_stack *stack_a, t_stack *stack_b) //The last A&B elements become the first ones.
+void	rev_rotate_both(t_stack *stack_a, t_stack *stack_b)
 {
 	rev_rotate_a(stack_a, 0);
 	rev_rotate_b(stack_b, 0);
-	write(1, "RRR\n", 4);
+	write(1, "rrr\n", 4);
 }

@@ -9,6 +9,9 @@
 		"span": "c",
 		"utility": "c",
 		"push_swap.h": "c",
-		"limits": "c"
+		"limits": "c",
+		"sstream": "c",
+		"stdlib.h": "c",
+		"stdio.h": "c"
 	}
 }

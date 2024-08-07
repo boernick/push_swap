@@ -6,11 +6,24 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:12:58 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/04 15:44:47 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/07 19:56:16 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_free_arr(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i] != NULL)
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
+}
 
 void	ft_sort_3num(t_stack *a)
 {
@@ -18,15 +31,15 @@ void	ft_sort_3num(t_stack *a)
 		rotate_a(a, 1);
 	while (*(int *)(ft_lstlast(a->lst_first))->content != find_max(a))
 		rev_rotate_a(a, 1);
-	if(*(int *)a->lst_first->content != find_min(a))
+	if (*(int *)a->lst_first->content != find_min(a))
 		swap_top_a(a, 1);
 }
 
 int	find_max(t_stack *stack)
 {
-	int	max;
+	int		max;
 	t_list	*current;
-	
+
 	if (!(stack->lst_first) || !(stack))
 		ft_error();
 	current = stack->lst_first;
@@ -44,7 +57,7 @@ int	find_min(t_stack *stack)
 {
 	int		min;
 	t_list	*current;
-		
+
 	if (!(stack->lst_first) || !(stack))
 		ft_error();
 	current = stack->lst_first;
@@ -58,20 +71,20 @@ int	find_min(t_stack *stack)
 	return (min);
 }
 
-void	free_lst(t_list **lst)
+void	free_stack(t_stack *a)
 {
-	t_list *tmp;
+	t_list	*tmp_a;
 
-	if (!lst)
+	if (!a->lst_first)
 		return ;
-	while (*lst)
+	while (a->lst_first)
 	{
-		tmp = (*lst)->next; // temporary is set to the upcoming node in the list
-		free((*lst)->content); //free content in the current node
-		free(*lst); // free the current node
-		*lst = tmp; // assign head pointer to tmp which was the adress of the upcoming node, now repeat. 
+		tmp_a = a->lst_first->next;
+		free(a->lst_first->content);
+		free(a->lst_first);
+		a->lst_first = tmp_a;
 	}
-	*lst = NULL; // this is to prevent a dangling pointer - which hold the adress of previously freed memory.
+	a->lst_first = NULL;
 }
 
 t_list	*newnode_int(int value)
@@ -89,22 +102,10 @@ t_list	*newnode_int(int value)
 	return (new_node);
 }
 
-void	print_list(t_list *lst)
+void	ft_error_free(t_stack *a)
 {
-	t_list	*tmp;
-	
-	if (!lst)
-	{
-		printf("%s\n", "empty");
-		return ;
-	}
-	tmp = lst;
-	while (tmp->next != NULL)
-	{
-		printf("%i ", *(int *)tmp->content);
-		tmp = tmp->next;
-	}
-	printf("%i \n", *(int *)tmp->content);
+	free_stack(a);
+	ft_error();
 }
 
 void	ft_error(void)
