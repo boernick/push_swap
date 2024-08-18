@@ -6,7 +6,7 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:23:34 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/18 16:59:41 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/18 18:12:56 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include "Libft/libft.h"
-// #include "/home/nick/42Berlin/push_swap/Libft/libft.h"
 
 typedef struct s_stack
 {

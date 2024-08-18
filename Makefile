@@ -18,7 +18,7 @@ $(NAME): $(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $(INCLUDES) -g -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) bonus
