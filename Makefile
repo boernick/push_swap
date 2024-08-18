@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 SRCS = push_swap.c push_swap_input.c push_swap_utils_1.c push_swap_utils_2.c push_swap_utils_3.c\
   push_swap_actions_1.c push_swap_actions_2.c push_swap_sort.c push_swap_do_move.c\
     push_swap_cases.c push_swap_set_move.c
