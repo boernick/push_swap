@@ -6,29 +6,11 @@
 /*   By: nboer <nboer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 22:46:35 by nboer             #+#    #+#             */
-/*   Updated: 2024/08/07 19:17:27 by nboer            ###   ########.fr       */
+/*   Updated: 2024/08/18 17:02:43 by nboer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	check_input(int argc, char *argv[])
-{
-	long	num;
-	int		i;
-
-	i = 0;
-	while (i < argc)
-	{
-		if (check_str(argv[i]))
-			return (0);
-		num = atol(argv[i]);
-		if (num > INT_MAX || num < INT_MIN)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	check_str(char *str)
 {
@@ -93,14 +75,6 @@ int	find_dup(t_stack *a)
 		tmp = tmp->next;
 	}
 	return (0);
-}
-
-void	init_stack(t_stack *stack)
-{
-	stack->lst_first = NULL;
-	stack->min = 0;
-	stack->max = 0;
-	stack->size = 0;
 }
 
 int	arrlen(char **arr)
